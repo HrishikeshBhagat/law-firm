@@ -1,0 +1,825 @@
+<!DOCTYPE html>
+<html lang="zxx">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <title>Lawdit - Lawyer and Law Firm Template</title>
+    <link rel="shortcut icon" href="img/favicon.png" />
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100..900;1,100..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap">
+    <link rel="stylesheet" href="css/plugins.css" />
+    <link rel="stylesheet" href="css/style.css" />
+    <style>
+        .step {
+            display: none;
+        }
+
+        .step.active {
+            display: block;
+        }
+
+        .step-header {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .box-option {
+            display: inline-block;
+            width: 48%;
+            padding: 15px;
+            margin: 1%;
+            border: 2px solid #ccc;
+            border-radius: 8px;
+            cursor: pointer;
+            text-align: center;
+            transition: 0.3s;
+        }
+
+        .box-option.selected {
+            border-color: #28a745;
+            background-color: #eaffea;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="number"] {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+        }
+
+        button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            background: #28a745;
+            color: #fff;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        button[disabled] {
+            background-color: #ccc;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Preloader -->
+    <div class="preloader-bg"></div>
+    <div id="preloader">
+        <div id="preloader-status">
+            <div class="preloader-position loader"> <span></span> </div>
+        </div>
+    </div>
+    <!-- Progress scroll totop -->
+    <div class="progress-wrap cursor-pointer">
+        <svg class="progress-circle svg-content" width="100%" height="100%" viewBox="-1 -1 102 102">
+            <path d="M50,1 a49,49 0 0,1 0,98 a49,49 0 0,1 0,-98" />
+        </svg>
+    </div>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg">
+        <div class="container">
+            <!-- Logo -->
+            <div class="logo-wrapper">
+                <a class="logo" href="index.html"><img src="img/logo.png" class="logo-img" alt=""></a>
+            </div>
+            <!-- Button -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar"
+                aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation"> <span
+                    class="navbar-toggler-icon"><i class="ti-menu"></i></span> </button>
+            <!-- Menu -->
+            <div class="collapse navbar-collapse" id="navbar">
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="index.html/#about">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Practice Areas</a></li>
+                    <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+                </ul>
+                <div class="navbar-right">
+                    <div class="button"><a data-bs-toggle="modal" data-bs-target="#exampleModal"
+                            href="contact.html">Book Consultation</a></div>
+                    <button class="btn btn-info mt-3" onclick="viewStatus()">View Status</button>
+                    <button class="btn btn-danger mt-4" onclick="logoutUser()">Logout</button>
+                    <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal"
+                        data-bs-target="#loginModal">
+                        Sign In
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <!-- Practice Areas -->
+    <section class="practice-areas section-padding">
+        <div class="container">
+            <div class="row align-items-start">
+                <div class="col-lg-4 col-md-12 mb-30 sticky-box pt-sm-5 pt-2">
+                    <div class="section-subtitle">
+                        <div class="icon"><i class="flaticon-courthouse"></i></div> Legal case studies
+                    </div>
+                    <div class="section-title">General <span>&</span> Legal <span>Practice Areas</span></div>
+                    <p>Lawyer sit amet risus ac duin auctor posuere fanish amet the acinia lecra fermen.</p> <a href="#"
+                        class="button-2">Discover more<span></span></a>
+                </div>
+                <div class="col-lg-7 offset-lg-1 col-md-12">
+                    <div class="row">
+                        <div class="col-lg-4 col-md-6">
+                            <div class="item">
+                                <a href="case-study-page.html"> <i class="flaticon-courthouse"></i>
+                                    <h5>Real Estate Law</h5>
+                                    <div class="shape"> <i class="flaticon-courthouse"></i> </div>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-6">
+                            <div class="item">
+                                <a href="case-study-page.html"> <i class="flaticon-balance"></i>
+                                    <h5>Personal Law</h5>
+                                    <div class="shape"> <i class="flaticon-balance"></i> </div>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-6">
+                            <div class="item">
+                                <a href="case-study-page.html"> <i class="flaticon-wounded"></i>
+                                    <h5>Personal Injury</h5>
+                                    <div class="shape"> <i class="flaticon-wounded"></i> </div>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-6">
+                            <div class="item">
+                                <a href="case-study-page.html"> <i class="flaticon-suitcase"></i>
+                                    <h5>Business Law</h5>
+                                    <div class="shape"> <i class="flaticon-suitcase"></i> </div>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-6">
+                            <div class="item">
+                                <a href="case-study-page.html"> <i class="flaticon-mortarboard"></i>
+                                    <h5>Education Law</h5>
+                                    <div class="shape"> <i class="flaticon-mortarboard"></i> </div>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-6">
+                            <div class="item">
+                                <a href="case-study-page.html"> <i class="flaticon-thief"></i>
+                                    <h5>Criminal Law</h5>
+                                    <div class="shape"> <i class="flaticon-thief"></i> </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- About -->
+    <section class="about section-padding" style="background-color: #f8f8f8;">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-5 col-md-12 animate-box mb-30" data-animate-effect="fadeInUp">
+                    <div class="item">
+                        <img src="img/about-01.jpg" class="img-fluid" alt="">
+                    </div>
+                </div>
+                <div class="col-lg-6 offset-lg-1 col-md-12 animate-box" data-animate-effect="fadeInUp">
+                    <div class="section-subtitle">
+                        <div class="icon"><i class="flaticon-courthouse"></i></div> About law firm
+                    </div>
+                    <div class="section-title">We are here to fight against <span>any violance</span></div>
+                    <p>Lawyer sit amet risus ac duin auctor posuere fanish amet the acinia lecratusan risus facilis
+                        semper etiam fermen.</p>
+                    <ul class="page-list list-unstyled mb-25">
+                        <li>
+                            <div class="page-list-icon"> <span class="ti-check"></span> </div>
+                            <div class="page-list-text">
+                                <p>Full service corporate & business law.</p>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="page-list-icon"> <span class="ti-check"></span> </div>
+                            <div class="page-list-text">
+                                <p>Realiable and innovative legal solutions.</p>
+                            </div>
+                        </li>
+                    </ul> <a href="#" class="button-2">Discover more<span></span></a>
+                </div>
+
+            </div>
+        </div>
+    </section>
+    <!-- Contact -->
+    <section class="info-box section-padding">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="section-subtitle">
+                        <div class="icon"><i class="flaticon-courthouse"></i></div> Get in touch
+                    </div>
+                    <div class="section-title">Do you need help? <span>Contact with us now!</span></div>
+                    <div class="item"> <i class="icon fa-regular fa-location-dot"></i>
+                        <div class="cont">
+                            <h5>Address</h5>
+                            <p>0665 Broadway NY, 10001 USA</p>
+                        </div>
+                    </div>
+                    <div class="item"> <i class="icon fa-solid fa-phone"></i>
+                        <div class="cont">
+                            <h5>Phone</h5>
+                            <p><a href="tel:+11235678910">+1 123 567 8910</a></p>
+                        </div>
+                    </div>
+                    <div class="item"> <i class="icon fa-regular fa-envelope"></i>
+                        <div class="cont">
+                            <h5>e-Mail</h5>
+                            <p>legal@lawdit.com</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-5 offset-md-1">
+
+
+                    <div class="contact-form">
+                        <form method="post">
+                            <h3>Contact with us <span>now!</span></h3>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <input type="text" name="name" id="name" placeholder="Full Name" required="">
+                                </div>
+                                <div class="col-md-12">
+                                    <input type="email" name="email" id="email" placeholder="E-mail Address"
+                                        required="">
+                                </div>
+                                <div class="col-md-12">
+                                    <textarea name="message" id="message" cols="40" rows="4" placeholder="Message"
+                                        required=""></textarea>
+                                </div>
+                                <div class="col-md-12">
+                                    <button class="button-3"><a href="#0"><span>Send Message</span></a></button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Footer -->
+    <footer class="footer">
+        <!-- top -->
+        <div class="top">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-4 mb-30">
+                        <div class="item">
+                            <div class="logo"><img src="img/logo.png" alt=""></div>
+                            <p>Lorem ipsum is simply dummy text of the rinte and type settin in the fermen.</p>
+                            <div class="social-icons">
+                                <ul class="list-inline">
+                                    <li><a href="#"><i class="fa-brands fa-instagram"></i></a></li>
+                                    <li><a href="#"><i class="fab fa-x-twitter"></i></a></li>
+                                    <li><a href="#"><i class="fa-brands fa-facebook-f"></i></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 offset-md-1 mb-30">
+                        <div class="item">
+                            <h3>Contact</h3>
+                            <p>0665 Broadway st.
+                                <br>10234 NY, USA
+                            </p>
+                            <div class="phone mb-0"><a href="tel:+11235678910">+1 123 567 8910</a></div>
+                            <div class="mail"><a href="mailto:legal@lawdit.com">legal@lawdit.com</a></div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-30">
+                        <div class="item">
+                            <h3>Subscribe</h3>
+                            <p>Want to be notified about our services. Sign up and we'll send you a notification by
+                                email.</p>
+                            <div class="newsletter">
+                                <form action="#">
+                                    <input type="email" placeholder="Email Address" required="">
+                                    <button type="submit"><i class="fa-light fa-arrow-right"></i></button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- bottom -->
+        <div class="bottom">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 col-md-12">
+                        <div class="links">
+                            <ul>
+                                <li><a href="index.html">Home</a></li>
+                                <li><a href="about.html">About</a></li>
+                                <li><a href="practice-areas.html">Practice areas</a></li>
+                                <li><a href="team.html">Attorneys</a></li>
+                                <li><a href="blog.html">Blog</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-12 text-end">
+                        <p>Copyright 2025 by <a href="#">DuruThemes</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- Modal -->
+    <div class="modal fade custom-mopdal" id="exampleModal" data-bs-backdrop="static" data-bs-keyboard="false"
+        tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-md">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <form id="stepperForm" onsubmit="return false;">
+
+                        <!-- Step 1 -->
+                        <div class="step active" id="step1">
+                            <div class="step-header">Step 1: Select City</div>
+                            <div class="box-option" onclick="selectCity(this)">Delhi</div>
+                            <div class="box-option" onclick="selectCity(this)">Noida</div>
+                            <div class="box-option" onclick="selectCity(this)">Gurugram</div>
+                            <div class="box-option" onclick="selectCity(this)">Faridabad</div>
+                        </div>
+
+                        <!-- Step 2 -->
+                        <div class="step" id="step2">
+                            <div class="step-header">Step 2: Enter Details</div>
+                            <button type="button" id="editUserBtn" class="btn btn-sm btn-secondary"
+                                style="display:none;" onclick="enableEdit()">Edit Info</button>
+                            <div class="form-group">
+                                <label>Full Name</label>
+                                <input type="text" id="fullName" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Full Address</label>
+                                <input type="text" id="address" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Email (optional)</label>
+                                <input type="email" id="email">
+                            </div>
+                            <div class="form-group">
+                                <label>Mobile Number</label>
+                                <input type="text" id="mobile">
+                                <button type="button" id="verifyMobileBtn" class="btn btn-primary mt-2"
+                                    onclick="sendOTP()">Verify</button>
+                            </div>
+                            <div class="form-group" id="otpSection" style="display: none;">
+                                <label>Enter OTP</label>
+                                <input type="text" id="otpInput">
+                                <button type="button" onclick="verifyOTP()">Verify OTP</button>
+                                <div id="otpMessage"></div>
+                            </div>
+                        </div>
+
+                        <!-- Step 3 -->
+                        <div class="step" id="step3">
+                            <div class="step-header">Step 3: Select Service</div>
+                            <div class="box-option" onclick="selectService(this, 2000)">Real Estate Case : ₹2000</div>
+                            <div class="box-option" onclick="selectService(this, 3000)">Criminal Case : ₹3000</div>
+                        </div>
+
+                        <!-- Step 4 -->
+                        <div class="step" id="step4">
+                            <div class="step-header">Step 4: Payment</div>
+                            <p>Total Amount: ₹<span id="amount">0</span></p>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="paymentMode" id="onlinePay"
+                                    value="Online" checked>
+                                <label class="form-check-label" for="onlinePay">Online Payment</label>
+                            </div>
+
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="paymentMode" id="offlinePay"
+                                    value="Offline">
+                                <label class="form-check-label" for="offlinePay">Offline Payment</label>
+                            </div>
+
+                            <p>Click "Checkout" to proceed with dummy payment.</p>
+                        </div>
+
+                        <!-- Step 5 -->
+                        <div class="step" id="step5">
+                            <div class="step-header">✅ Payment Successful</div>
+                            <p>Thank you! We’ve received your request. Our team will get in touch with you shortly.</p>
+                        </div>
+
+                        <!-- Navigation Buttons -->
+                        <div class="buttons" id="navButtons">
+                            <button type="button" onclick="prevStep()" id="prevBtn" disabled>Previous</button>
+                            <button type="button" onclick="nextStep()" id="nextBtn">Next</button>
+                        </div>
+                    </form>
+
+                </div>
+                <div class="modal-footer justify-content-between">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <div class="d-flex gap-2">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Save changes</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Bootstrap Dummy Payment Modal -->
+    <div class="modal fade" id="paymentModal" tabindex="-1" aria-labelledby="paymentModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content p-3">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="paymentModalLabel">Dummy Payment Gateway</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label class="form-label">Card Number</label>
+                        <input type="text" class="form-control" placeholder="1234 5678 9012 3456" />
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Expiry Date</label>
+                        <input type="text" class="form-control" placeholder="MM/YY" />
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">CVV</label>
+                        <input type="text" class="form-control" placeholder="123" />
+                    </div>
+                </div>
+                <div class="modal-footer d-flex justify-content-between">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-success" onclick="processPayment()">Pay Now</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <!-- Login Modal -->
+    <div class="modal fade" id="loginModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content p-4">
+                <h5 class="modal-title">Sign In</h5>
+                <div class="form-group mt-3">
+                    <label>Enter Mobile No.</label>
+                    <input type="text" class="form-control" id="loginMobile">
+                    <button class="btn btn-success mt-2" onclick="checkMobile()">Verify</button>
+                    <div id="loginMessage" class="mt-2"></div>
+                </div>
+                <div class="form-group mt-3" id="otpLoginSection" style="display:none;">
+                    <label>Enter OTP</label>
+                    <input type="text" class="form-control" id="loginOtpInput">
+                    <button class="btn btn-primary mt-2" onclick="verifyLoginOtp()">Verify OTP</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--View Status Modal -->
+    <div class="modal fade" id="statusModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content p-3">
+                <h5>Your Submitted Cases</h5>
+                <table class="table table-sm">
+                    <thead>
+                        <tr>
+                            <th>Case ID</th>
+                            <th>Service</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody id="caseStatusTable"></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        function checkMobile() {
+            const mobile = document.getElementById("loginMobile").value;
+            fetch('check_mobile.php', {
+                method: "POST",
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: "mobile=" + mobile
+            })
+                .then(res => res.text())
+                .then(res => {
+                    const msg = document.getElementById("loginMessage");
+                    if (res === "exists") {
+                        msg.innerHTML = "✅ Mobile found, please enter OTP";
+                        msg.style.color = "green";
+                        document.getElementById("otpLoginSection").style.display = "block";
+                    } else {
+                        msg.innerHTML = "❌ Mobile not found. Please register first.";
+                        msg.style.color = "red";
+                    }
+                });
+        }
+
+        function verifyLoginOtp() {
+            const otp = document.getElementById("loginOtpInput").value;
+            if (otp === "1234") {
+                alert("Login successful!");
+                document.getElementById("loginModal").classList.remove("show");
+                document.querySelector(".modal-backdrop")?.remove();
+                document.body.classList.remove("modal-open");
+                location.reload();
+            } else {
+                alert("Wrong OTP!");
+            }
+        }
+
+        window.onload = function () {
+            fetch("get_user_data.php")
+                .then(res => res.json())
+                .then(user => {
+                    if (user.error) {
+                        console.warn("User not logged in");
+                        return;
+                    }
+
+                    // Prefill and lock fields
+                    document.getElementById("fullName").value = user.name;
+                    document.getElementById("email").value = user.email;
+                    document.getElementById("address").value = user.address;
+                    document.getElementById("mobile").value = user.mobile;
+
+                    document.getElementById("fullName").readOnly = true;
+                    document.getElementById("email").readOnly = true;
+                    document.getElementById("address").readOnly = true;
+                    document.getElementById("mobile").readOnly = true;
+
+                    // Hide OTP-related UI
+                    const verifyBtn = document.getElementById("verifyMobileBtn");
+                    const otpSection = document.getElementById("otpSection");
+
+                    if (verifyBtn) verifyBtn.style.display = "none";
+                    if (otpSection) otpSection.style.display = "none";
+
+                    // Flag user as logged in (optional global variable)
+                    window.userIsLoggedIn = true;
+                });
+        };
+
+
+        function enableEdit() {
+            document.getElementById("fullName").readOnly = false;
+            document.getElementById("email").readOnly = false;
+            document.getElementById("address").readOnly = false;
+            document.getElementById("mobile").readOnly = false;
+        }
+
+        function viewStatus() {
+            fetch("get_user_cases.php")
+                .then(res => res.json())
+                .then(data => {
+                    let html = "";
+                    data.forEach(row => {
+                        html += `<tr><td>${row.id}</td><td>${row.service}</td><td>${row.status}</td></tr>`;
+                    });
+                    document.getElementById("caseStatusTable").innerHTML = html;
+                    new bootstrap.Modal(document.getElementById("statusModal")).show();
+                });
+        }
+
+        function logoutUser() {
+            fetch("logout_user.php")
+                .then(() => {
+                    alert("Logged out successfully.");
+                    window.location.href = "index.php"; // or your homepage
+                });
+        }
+
+
+    </script>
+
+    <script>
+        let currentStep = 1;
+        let selectedCity = '';
+        let selectedService = '';
+        let serviceAmount = 0;
+        const otp = "1234";
+        let otpVerified = false;
+        let paymentMode = "Online";
+
+        function updateButtons() {
+            document.getElementById("prevBtn").disabled = currentStep === 1;
+            const nextBtn = document.getElementById("nextBtn");
+
+            if (currentStep === 4) {
+                nextBtn.innerText = "Checkout";
+            } else if (currentStep === 5) {
+                document.getElementById("navButtons").style.display = "none";
+            } else {
+                nextBtn.innerText = "Next";
+            }
+        }
+
+        function showStep(step) {
+            document.querySelectorAll(".step").forEach(s => s.classList.remove("active"));
+            document.getElementById(`step${step}`).classList.add("active");
+            updateButtons();
+        }
+
+        function nextStep() {
+            if (!validateStep(currentStep)) return;
+
+            if (currentStep === 4) {
+                const selectedMode = document.querySelector('input[name="paymentMode"]:checked').value;
+                paymentMode = selectedMode; // store in global variable
+
+                if (paymentMode === 'Online') {
+                    showModal(); // open dummy gateway
+                } else {
+                    // Offline selected — skip modal, go next
+                    submitToServer();
+                }
+                return;
+            }
+
+            if (currentStep < 5) {
+                currentStep++;
+                showStep(currentStep);
+            }
+        }
+
+        function showModal() {
+            const modal = new bootstrap.Modal(document.getElementById('paymentModal'));
+            modal.show();
+        }
+
+
+        function closeModal() {
+            document.getElementById("paymentModal").style.display = "none";
+        }
+
+        function processPayment() {
+            // Simulate 2s delay
+            document.querySelector("#paymentModal button[onclick='processPayment()']").innerText = "Processing...";
+            submitToServer();
+            setTimeout(() => {
+                alert("Payment Successful (Dummy)");
+                currentStep++;
+                showStep(currentStep);
+            }, 2000);
+            const modal = bootstrap.Modal.getInstance(document.getElementById('paymentModal'));
+            modal.hide();
+        }
+
+        function submitToServer() {
+            const data = {
+                city: selectedCity,
+                name: document.getElementById("fullName").value,
+                address: document.getElementById("address").value,
+                email: document.getElementById("email").value,
+                mobile: document.getElementById("mobile").value,
+                service: selectedService,
+                amount: serviceAmount,
+                payment_mode: paymentMode
+            };
+
+            fetch('submit_form.php', {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(data)
+            })
+                .then(res => res.text())
+                .then(res => {
+                    console.log("Server response:", res); // 🔍 this will show us what's returned
+
+                    if (res.trim() === "success") {
+                        currentStep++;
+                        showStep(currentStep);
+                    } else {
+                        alert("Error saving data: " + res); // show the actual error
+                    }
+                });
+
+        }
+
+
+        function prevStep() {
+            if (currentStep > 1) {
+                currentStep--;
+                showStep(currentStep);
+            }
+        }
+
+        function selectCity(elem) {
+            document.querySelectorAll("#step1 .box-option").forEach(el => el.classList.remove("selected"));
+            elem.classList.add("selected");
+            selectedCity = elem.innerText;
+        }
+
+        function sendOTP() {
+            if (window.userIsLoggedIn) {
+                console.log("Logged-in user – skipping OTP verification.");
+                return;
+            }
+
+            const mobile = document.getElementById("mobile").value;
+            if (mobile.length !== 10) {
+                alert("Enter a valid 10-digit mobile number.");
+                return;
+            }
+
+            alert("OTP Sent: 1234");
+            document.getElementById("otpSection").style.display = "block";
+        }
+
+
+        function verifyOTP() {
+            const entered = document.getElementById("otpInput").value;
+            const msg = document.getElementById("otpMessage");
+            if (entered === otp) {
+                otpVerified = true;
+                msg.innerText = "✅ OTP Verified";
+                msg.style.color = "green";
+            } else {
+                msg.innerText = "❌ Incorrect OTP";
+                msg.style.color = "red";
+            }
+        }
+
+        function selectService(elem, amount) {
+            document.querySelectorAll("#step3 .box-option").forEach(el => el.classList.remove("selected"));
+            elem.classList.add("selected");
+            selectedService = elem.innerText;
+            serviceAmount = amount;
+            document.getElementById("amount").innerText = amount;
+        }
+
+        function validateStep(step) {
+            if (step === 1 && !selectedCity) {
+                alert("Please select a city.");
+                return false;
+            }
+
+            if (step === 2) {
+                const name = document.getElementById("fullName").value.trim();
+                const addr = document.getElementById("address").value.trim();
+                const mob = document.getElementById("mobile").value.trim();
+                if (!name || !addr || mob.length !== 10) {
+                    alert("Please fill all required fields properly.");
+                    return false;
+                }
+                if (!otpVerified) {
+                    alert("Please verify OTP first.");
+                    return false;
+                }
+            }
+
+            if (step === 3 && !selectedService) {
+                alert("Please select a service.");
+                return false;
+            }
+
+            return true;
+        }
+    </script>
+
+    <script src="js/jquery-3.6.3.min.js"></script>
+    <script src="js/jquery-migrate-3.0.0.min.js"></script>
+    <script src="js/modernizr-2.6.2.min.js"></script>
+    <script src="js/imagesloaded.pkgd.min.js"></script>
+    <script src="js/jquery.isotope.v3.0.2.js"></script>
+    <script src="js/popper.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/scrollIt.min.js"></script>
+    <script src="js/jquery.waypoints.min.js"></script>
+    <script src="js/owl.carousel.min.js"></script>
+    <script src="js/jquery.stellar.min.js"></script>
+    <script src="js/jquery.magnific-popup.js"></script>
+    <script src="js/YouTubePopUp.js"></script>
+    <script src="js/smooth-scroll.min.js"></script>
+    <script src="js/custom.js"></script>
+</body>
+
+</html>
