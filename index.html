@@ -111,14 +111,10 @@
                     <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
                 </ul>
                 <div class="navbar-right">
-                    <div class="button"><a data-bs-toggle="modal" data-bs-target="#exampleModal"
+                    <div class="button show-when-logged-out"><a data-bs-toggle="modal" data-bs-target="#exampleModal"
                             href="contact.html">Book Consultation</a></div>
-                    <button class="btn btn-info mt-3" onclick="viewStatus()">View Status</button>
-                    <button class="btn btn-danger mt-4" onclick="logoutUser()">Logout</button>
-                    <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal"
-                        data-bs-target="#loginModal">
-                        Sign In
-                    </button>
+                    <button class="btn btn-info mt-3 show-when-logged-in" onclick="viewStatus()">View Status</button>
+
                 </div>
             </div>
         </div>
@@ -133,7 +129,7 @@
                     </div>
                     <div class="section-title">General <span>&</span> Legal <span>Practice Areas</span></div>
                     <p>Lawyer sit amet risus ac duin auctor posuere fanish amet the acinia lecra fermen.</p> <a href="#"
-                        class="button-2">Discover more<span></span></a>
+                        class="button-2" data-bs-toggle="modal" data-bs-target="#exampleModal">Discover more<span></span></a>
                 </div>
                 <div class="col-lg-7 offset-lg-1 col-md-12">
                     <div class="row">
@@ -352,7 +348,7 @@
     <div class="modal fade custom-mopdal" id="exampleModal" data-bs-backdrop="static" data-bs-keyboard="false"
         tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-md">
-            <div class="modal-content" id="hero-model">
+            <div class="modal-content">
                 <div class="modal-body">
                     <form id="stepperForm" onsubmit="return false;">
 
@@ -368,8 +364,8 @@
                         <!-- Step 2 -->
                         <div class="step" id="step2">
                             <div class="step-header">Step 2: Enter Details</div>
-                            <button type="button" id="editUserBtn" class="btn btn-sm btn-secondary"
-                                style="display:none;" onclick="enableEdit()">Edit Info</button>
+                            <button type="button" id="editUserBtn" class="btn btn-sm btn-secondary show-when-logged-in"
+                                 onclick="enableEdit()">Edit Info</button>
                             <div class="form-group">
                                 <label>Full Name</label>
                                 <input type="text" id="fullName" required>
@@ -379,8 +375,8 @@
                                 <input type="text" id="address" required>
                             </div>
                             <div class="form-group">
-                                <label>Email (optional)</label>
-                                <input type="email" id="email">
+                                <label>Email</label>
+                                <input type="text" id="email" required>
                             </div>
                             <div class="form-group">
                                 <label>Mobile Number</label>
@@ -426,6 +422,8 @@
                         <div class="step" id="step5">
                             <div class="step-header">✅ Payment Successful</div>
                             <p>Thank you! We’ve received your request. Our team will get in touch with you shortly.</p>
+                            <button onclick="refreshPage()">Okay</button>
+
                         </div>
 
                         <!-- Navigation Buttons -->
@@ -437,7 +435,11 @@
 
                 </div>
                 <div class="modal-footer justify-content-between">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <!-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button> -->
+                    <button type="button" class="btn btn-outline-primary show-when-logged-out" data-bs-toggle="modal"
+                        data-bs-target="#loginModal">
+                        Sign In
+                    </button>
                     <div class="d-flex gap-2">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                         <button type="button" class="btn btn-primary">Save changes</button>
@@ -516,6 +518,8 @@
                     </thead>
                     <tbody id="caseStatusTable"></tbody>
                 </table>
+                <button class="btn btn-danger mt-4" onclick="logoutUser()">Logout</button>
+
             </div>
         </div>
     </div>
@@ -560,6 +564,17 @@
             fetch("get_user_data.php")
                 .then(res => res.json())
                 .then(user => {
+                    const isLoggedIn = !user.error;
+                    console.log("user",user)
+                    console.log("isLoggedIn",isLoggedIn)
+                    document.querySelectorAll(".show-when-logged-in").forEach(el => {
+                        el.style.display = isLoggedIn ? "inline-block" : "none";
+                    });
+
+                    document.querySelectorAll(".show-when-logged-out").forEach(el => {
+                        el.style.display = isLoggedIn ? "none" : "inline-block";
+                    });
+
                     if (user.error) {
                         console.warn("User not logged in");
                         return;
@@ -591,15 +606,17 @@
 
         function enableEdit() {
             document.getElementById("fullName").readOnly = false;
-            document.getElementById("email").readOnly = false;
+            document.getElementById("email").readOnly = true;
             document.getElementById("address").readOnly = false;
-            document.getElementById("mobile").readOnly = false;
+            document.getElementById("mobile").readOnly = true;
+            
         }
 
         function viewStatus() {
             fetch("get_user_cases.php")
                 .then(res => res.json())
                 .then(data => {
+                    console.log("data---->",data)
                     let html = "";
                     data.forEach(row => {
                         html += `<tr><td>${row.id}</td><td>${row.service}</td><td>${row.status}</td></tr>`;
@@ -613,7 +630,7 @@
             fetch("logout_user.php")
                 .then(() => {
                     alert("Logged out successfully.");
-                    window.location.href = "index.php"; // or your homepage
+                    window.location.href = "/law-firm/law-firm/"; // or your homepage
                 });
         }
 
@@ -691,13 +708,16 @@
                 showStep(currentStep);
                 const modal = bootstrap.Modal.getInstance(document.getElementById('paymentModal'));
                 modal.hide();
-                const heroModel = bootstrap.Modal.getInstance(document.getElementById('hero-model'));
-                heroModel.hide();
+                const modal2 = bootstrap.Modal.getInstance(document.getElementById('exampleModal'));
+                modal2.hide();
+                location.reload();
             }, 2000);
 
         }
 
-        function submitToServer() {
+        function submitToServer(onSuccessCallback) {
+            console.log("Email just before submit:", document.getElementById("email").value);
+
             const data = {
                 city: selectedCity,
                 name: document.getElementById("fullName").value,
@@ -708,7 +728,7 @@
                 amount: serviceAmount,
                 payment_mode: paymentMode
             };
-
+            console.log("data------",data)
             fetch('submit_form.php', {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
@@ -749,6 +769,7 @@
             }
 
             const mobile = document.getElementById("mobile").value;
+            
             if (mobile.length !== 10) {
                 alert("Enter a valid 10-digit mobile number.");
                 return;
@@ -794,7 +815,8 @@
                     alert("Please fill all required fields properly.");
                     return false;
                 }
-                if (!otpVerified) {
+                // Only require OTP if user is NOT logged in
+                if (!window.userIsLoggedIn && !otpVerified) {
                     alert("Please verify OTP first.");
                     return false;
                 }
@@ -808,7 +830,11 @@
             return true;
         }
     </script>
-
+    <script>
+        function refreshPage() {
+            location.reload(); // Reloads the current page
+        }
+    </script>
     <script src="js/jquery-3.6.3.min.js"></script>
     <script src="js/jquery-migrate-3.0.0.min.js"></script>
     <script src="js/modernizr-2.6.2.min.js"></script>

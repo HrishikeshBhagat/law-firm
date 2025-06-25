@@ -53,8 +53,8 @@ if (!$user_id) {
 }
 
 // Insert into form_submissions
-$stmt = $conn->prepare("INSERT INTO form_submissions (user_id, name, mobile, address, city, service, amount, status, payment_mode) VALUES (?, ?, ?, ?, ?, ?, ?, 'Received', ?)");
-$stmt->bind_param("isssssds", $user_id, $name, $mobile, $address, $city, $service, $amount, $payment_mode);
+$stmt = $conn->prepare("INSERT INTO form_submissions (user_id, name, email, mobile, address, city, service, amount, status, payment_mode) VALUES (?, ?, ?, ?, ?, ?, ?, ?, 'Received', ?)");
+$stmt->bind_param("issssssds", $user_id, $name, $email, $mobile, $address, $city, $service, $amount, $payment_mode);
 
 if ($stmt->execute()) {
     echo "success";
