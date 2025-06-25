@@ -352,7 +352,7 @@
     <div class="modal fade custom-mopdal" id="exampleModal" data-bs-backdrop="static" data-bs-keyboard="false"
         tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-md">
-            <div class="modal-content">
+            <div class="modal-content" id="hero-model">
                 <div class="modal-body">
                     <form id="stepperForm" onsubmit="return false;">
 
@@ -691,6 +691,8 @@
                 showStep(currentStep);
                 const modal = bootstrap.Modal.getInstance(document.getElementById('paymentModal'));
                 modal.hide();
+                const heroModel = bootstrap.Modal.getInstance(document.getElementById('hero-model'));
+                heroModel.hide();
             }, 2000);
 
         }
