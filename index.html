@@ -683,14 +683,16 @@
         function processPayment() {
             // Simulate 2s delay
             document.querySelector("#paymentModal button[onclick='processPayment()']").innerText = "Processing...";
-            submitToServer();
+            
             setTimeout(() => {
+                submitToServer();
                 alert("Payment Successful (Dummy)");
                 currentStep++;
                 showStep(currentStep);
+                const modal = bootstrap.Modal.getInstance(document.getElementById('paymentModal'));
+                modal.hide();
             }, 2000);
-            const modal = bootstrap.Modal.getInstance(document.getElementById('paymentModal'));
-            modal.hide();
+
         }
 
         function submitToServer() {
